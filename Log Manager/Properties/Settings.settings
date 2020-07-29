@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Log_Manager.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Local" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Datalog_Manager</Value>
+    </Setting>
+    <Setting Name="FTP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ftp://10.201.192.227/DataLOG/</Value>
+    </Setting>
+    <Setting Name="Log1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Agilent_ICT\log\testplan.txt</Value>
+    </Setting>
+    <Setting Name="Log2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Agilent3070\log\testplan.txt</Value>
+    </Setting>
+    <Setting Name="user" Type="System.String" Scope="User">
+      <Value Profile="(Default)">apple</Value>
+    </Setting>
+    <Setting Name="password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">pa31597</Value>
+    </Setting>
+    <Setting Name="LogMaster" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ftp://10.201.192.227/LogMaster/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

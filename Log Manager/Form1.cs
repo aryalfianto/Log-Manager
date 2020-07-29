@@ -85,7 +85,6 @@ namespace Log_Manager
         }
         string [] ParsingLog(string arraye)
         {
-            
             string removespace = arraye.Replace(" ", "");
             string removeblanksenter = removespace.Replace("\r\n\r\n", "\r\n");
             string removeblanksenter1 = removeblanksenter.Replace("\r\n", "\r");
@@ -188,6 +187,12 @@ namespace Log_Manager
                 }
                 catch
                 {
+                }
+                if(skip.Count > 0)
+                {
+                    string firstElem = skip.First();
+                    string restOfArray = string.Join("\n\r", skip.Skip(1));
+                    MessageBox.Show(restOfArray);
                 }
                 
             }

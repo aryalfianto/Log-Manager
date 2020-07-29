@@ -76,7 +76,6 @@ namespace Log_Manager
                 logmaster = CekFTPtestlog(LogMaster, logname);
                 if (logmaster == true)
                 {
-
                 }
                 else
                 {
@@ -133,7 +132,6 @@ namespace Log_Manager
                                 component5.Add(oke[4]);
                             }
                         }
-                        
                     }
                     catch
                     {
@@ -169,7 +167,6 @@ namespace Log_Manager
                                     componentmaster5.Add(oke[4]);
                                 }
                             }
-
                         }
                         catch
                         {
@@ -185,8 +182,7 @@ namespace Log_Manager
                         }
                         else
                         {
-                            skip.Add(component);
-                             MessageBox.Show("component skip :"+ component );
+                            skip.Add(component); 
                         }
                     }
                 }
@@ -255,7 +251,6 @@ namespace Log_Manager
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(path + logname + "/"));
             request.Method = WebRequestMethods.Ftp.ListDirectory;
             request.Credentials = new NetworkCredential(user, password);
-
             try
             {
                 using (request.GetResponse())

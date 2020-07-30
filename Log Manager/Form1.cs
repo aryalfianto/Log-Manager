@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Net;
+using System.Diagnostics;
 
 namespace Log_Manager
 {
@@ -76,6 +77,7 @@ namespace Log_Manager
                 logmaster = CekFTPtestlog(LogMaster, logname);
                 if (logmaster == true)
                 {
+
                 }
                 else
                 {
@@ -90,6 +92,7 @@ namespace Log_Manager
             string removeblanksenter1 = removeblanksenter.Replace("\r\n", "\r");
             return removeblanksenter1.Split('\r');
         }
+        string skiptest;
         private void CompareLog(string localpath, string logmasterpath)
         {
             List<String> Mylocalfolder = Directory.GetFiles(localpath, "*.txt*", SearchOption.AllDirectories).ToList();
@@ -105,12 +108,14 @@ namespace Log_Manager
             List<string> componentmaster3 = new List<string>();
             List<string> componentmaster4 = new List<string>();
             List<string> componentmaster5 = new List<string>();
+
             foreach (string file in Mylocalfolder)
             {
                 FileInfo mFile = new FileInfo(file);
                 string hasilfile = Convert.ToString(mFile);
                 string localfile = File.ReadAllText(hasilfile);
                 string [] perbaris = ParsingLog(localfile);
+                
                 for (int a = 0; a <= perbaris.Length; a++)
                 {
                     try
@@ -187,13 +192,13 @@ namespace Log_Manager
                 }
                 catch
                 {
-                    //rhd
                 }
                 if(skip.Count > 0)
                 {
                     string firstElem = skip.First();
-                    string restOfArray = string.Join("\n\r", skip.Skip(1));
-                    MessageBox.Show(restOfArray);
+                    string restOfArray = string.Join("\n", skip.Skip(1));
+                    skiptest = restOfArray;
+                    MessageBox.Show("WARNING!\nBerikut List Component yang terdeteksi diskip\nTolong Perbaiki Testplan atau Segera Hubungi Engineer Project ini\n\n" + skiptest);
                 }
                 
             }

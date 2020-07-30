@@ -187,6 +187,7 @@ namespace Log_Manager
                 }
                 catch
                 {
+                    //rhd
                 }
                 if(skip.Count > 0)
                 {

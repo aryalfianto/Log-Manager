@@ -157,8 +157,15 @@ namespace Log_Manager
                 catch
                 {
                 }
-                //List<string> skipped = skipcheck(comp, compmaster);
-                List<string> overparameter = over(comp, compmaster);
+                List<string> skipped = skipcheck(comp, compmaster);
+                if (skipped.Count == 0)
+                {
+                    List<string> overparameter = over(comp, compmaster);
+                }
+                else
+                {
+                    
+                }
             }    
         }
         public string convert_string_to_no(string val)

@@ -7,3 +7,13 @@ D:\Desktop Programming\Log Manager\Log Manager\obj\Debug\Log Manager.csproj.Gene
 D:\Desktop Programming\Log Manager\Log Manager\obj\Debug\Log Manager.exe
 D:\Desktop Programming\Log Manager\Log Manager\obj\Debug\Log Manager.pdb
 D:\Desktop Programming\Log Manager\Log Manager\obj\Debug\Log Manager.csprojResolveAssemblyReference.cache
+D:\Desktop Programming\Log-Manager\Log Manager\bin\Debug\Log Manager.exe.config
+D:\Desktop Programming\Log-Manager\Log Manager\bin\Debug\Log Manager.exe
+D:\Desktop Programming\Log-Manager\Log Manager\bin\Debug\Log Manager.pdb
+D:\Desktop Programming\Log-Manager\Log Manager\obj\Debug\Log Manager.csprojAssemblyReference.cache
+D:\Desktop Programming\Log-Manager\Log Manager\obj\Debug\Log_Manager.Form1.resources
+D:\Desktop Programming\Log-Manager\Log Manager\obj\Debug\Log_Manager.Properties.Resources.resources
+D:\Desktop Programming\Log-Manager\Log Manager\obj\Debug\Log Manager.csproj.GenerateResource.cache
+D:\Desktop Programming\Log-Manager\Log Manager\obj\Debug\Log Manager.csproj.CoreCompileInputs.cache
+D:\Desktop Programming\Log-Manager\Log Manager\obj\Debug\Log Manager.exe
+D:\Desktop Programming\Log-Manager\Log Manager\obj\Debug\Log Manager.pdb

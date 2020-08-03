@@ -92,9 +92,202 @@ namespace Log_Manager
             string removeblanksenter1 = removeblanksenter.Replace("\r\n", "\r");
             return removeblanksenter1.Split('\r');
         }
+        string MasterLOG;
         private void CompareLog(string localpath, string logmasterpath)
         {
-            
+            List<String> Mylocalfolder = Directory.GetFiles(localpath, "*.txt", SearchOption.AllDirectories).ToList();
+            foreach (string file in Mylocalfolder)
+            {
+                List<string>info = new List<string>();
+                List<string>comp = new List<string>();
+                string localfile = File.ReadAllText(file);
+                string [] compressed = ParsingLog(localfile);
+                foreach (string isi in compressed)
+                {
+                    if (isi != "")
+                    {
+                        string [] com = isi.Split(':');
+                        if (com.Length == 2)
+                        {
+                            info.Add(isi);
+                        }
+                        else if (com.Length == 3)
+                        {
+                            info.Add(isi);
+                        }
+                        else
+                        {
+                            comp.Add(isi);
+                        }
+
+                    }
+                }
+                List<string> infomaster = new List<string>();
+                List<string> compmaster = new List<string>();
+                WebClient request = new WebClient();
+                string url = logmasterpath + logname +"/"+"Master.txt";
+                request.Credentials = new NetworkCredential(user,password);
+                
+                try
+                {
+                    byte[] newFileData = request.DownloadData(url);
+                    MasterLOG = System.Text.Encoding.UTF8.GetString(newFileData);
+                    string[] compressedmaster = ParsingLog(MasterLOG);
+                    foreach (string isi in compressedmaster)
+                    {
+                        if (isi != "")
+                        {
+                            string[] com = isi.Split(':');
+                            if (com.Length == 2)
+                            {
+                                info.Add(isi);
+                            }
+                            else if (com.Length == 3)
+                            {
+                                info.Add(isi);
+                            }
+                            else
+                            {
+                                compmaster.Add(isi);
+                            }
+
+                        }
+                    }
+                }
+                catch
+                {
+                }
+                //List<string> skipped = skipcheck(comp, compmaster);
+                List<string> overparameter = over(comp, compmaster);
+            }    
+        }
+        public string convert_string_to_no(string val)
+        {
+            bool kilo = false;
+            bool mega =false;
+            bool miliV = false;
+            if (val.Contains("mV"))
+            {
+                miliV = true;
+            }
+            if(val.Contains('K'))
+            {
+                kilo = true;
+            }
+            if(val.Contains('M'))
+            {
+                mega = true;
+            }
+            if (val == "Pass")
+            {
+                val = "1";
+            }
+            if (val == "Fail")
+            {
+                val = "0";
+            }
+            if (val == "OPEN")
+            {
+                val = "99999999";
+            }
+            string str_val = "";
+            int val_len = val.Length;
+            for (int i = 0; i < val_len; i++)
+            {
+                char myChar = Convert.ToChar(val.Substring(i, 1));
+                if (char.IsDigit(myChar) || myChar == '.' || myChar == '-')
+                {
+                    
+                    str_val += myChar;
+                }
+            }
+            if (str_val.Contains('-'))
+            {
+                str_val = str_val.Replace("-","");
+                double a = Convert.ToDouble(str_val);
+                double ok = 0 - a;
+                str_val = Convert.ToString(ok);
+            }
+            if(kilo==true)
+            {
+                double test = Convert.ToDouble(str_val);
+                double hasil = test * 1000;
+                str_val = Convert.ToString(hasil);
+            }
+            if (mega == true)
+            {
+                double test = Convert.ToDouble(str_val);
+                double hasil = test * 1000000;
+                str_val = Convert.ToString(hasil);
+            }
+            if (miliV == true)
+            {
+                double test = Convert.ToDouble(str_val);
+                double hasil = test / 1000;
+                str_val = Convert.ToString(hasil);
+            }
+            return str_val;
+        } 
+        private List<string> over (List<string> localcomp, List<string> Master)
+        {
+            localcomp.Sort();
+            Master.Sort();
+            List<string> Comp = new List<string>();
+            for (int a = 0; a <= localcomp.Count - 1; a++)
+            {
+                string[] splited = localcomp[a].Split(':');
+                Comp.Add(splited[2]);
+            }
+            List<string> MastLow = new List<string>();
+            List<string> MastHigh = new List<string>();
+            for (int a = 0; a <= Master.Count - 1; a++)
+            {
+                string[] splited = Master[a].Split(':');
+                MastLow.Add(splited[1]);
+                MastHigh.Add(splited[3]);
+            }
+            List<string> Pass = new List<string>();
+            List<string> Fail = new List<string>();
+            for (int a = 0; a < Master.Count; a++)
+            {
+                try
+                {
+                    double result = Convert.ToDouble(convert_string_to_no(Comp[a]));
+                    double low = Convert.ToDouble(convert_string_to_no(MastLow[a]));
+                    double high = Convert.ToDouble(convert_string_to_no(MastHigh[a]));
+                    if (result >= low && result <= high)
+                    {
+                        Pass.Add(localcomp[a]);
+                    }
+                    else
+                    {
+                        Fail.Add(localcomp[a]);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            return Fail;
+        }
+        private List<string> skipcheck(List<string> localcomp, List<string> Master)
+        {
+            List<string> Comp = new List<string>();
+            for(int a=0 ; a<=localcomp.Count-1;a++)
+            {
+                string [] splited = localcomp[a].Split(':');
+                Comp.Add(splited[0]);
+            }
+            List<string> Mast = new List<string>();
+            for (int a = 0; a <= Master.Count-1; a++)
+            {
+                string[] splited = Master[a].Split(':');
+                Mast.Add(splited[0]);
+            }
+            IEnumerable<string> difference = Mast.Except(Comp);
+            List<string> asList = difference.ToList();
+            return asList;
         }
         private void SendtoFTP(string localpath, string ftppath)
         {

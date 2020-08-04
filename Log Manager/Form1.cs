@@ -26,12 +26,10 @@ namespace Log_Manager
         public Form1()
         {
             InitializeComponent();
-            logname = "TEST";
-            CompareLog(local, LogMaster);
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-           
+            LogManager();
         }
         string[] pemisah;
         string jamlocal;
@@ -77,7 +75,8 @@ namespace Log_Manager
                 logmaster = CekFTPtestlog(LogMaster, logname);
                 if (logmaster == true)
                 {
-
+                    CompareLog(local, LogMaster);
+                    SendtoFTP(local, DataLogFTP);
                 }
                 else
                 {
@@ -161,10 +160,19 @@ namespace Log_Manager
                 if (skipped.Count == 0)
                 {
                     List<string> overparameter = over(comp, compmaster);
+                    if(overparameter.Count != 0)
+                    {
+                        label1.Text = "Over Parameter";
+                        richTextBox1.Lines = overparameter.ToArray();
+                        this.Show();
+                    }
+                    
                 }
                 else
                 {
-                    
+                    label1.Text = "Skip Component";
+                    richTextBox1.Lines = skipped.ToArray();
+                    this.Show();
                 }
             }    
         }
@@ -271,9 +279,8 @@ namespace Log_Manager
                         Fail.Add(localcomp[a]);
                     }
                 }
-                catch(Exception ex)
+                catch
                 {
-                    MessageBox.Show(ex.Message);
                 }
             }
             return Fail;
@@ -341,13 +348,20 @@ namespace Log_Manager
         }
         private void testplan()
         {
-            if (File.Exists(log1))
+            try
             {
-                parsing(log1);
+                if (File.Exists(log1))
+                {
+                    parsing(log1);
+                }
+                if (File.Exists(log2))
+                {
+                    parsing(log2);
+                }
             }
-            if (File.Exists(log2))
+            catch
             {
-                parsing(log2);
+
             }
         }
         private bool CekFTPtestlog(string path, string logname)
@@ -369,19 +383,14 @@ namespace Log_Manager
         }
         public bool CekLocal (string path)
         {
-            if(!File.Exists(path))
+            if(File.Exists(path)==false)
             {
                 System.IO.Directory.CreateDirectory(path);
             }
             try
             {
-                int count = 0;
-                List<String> Mylocalfolder = Directory.GetFiles(path, "*.txt*", SearchOption.AllDirectories).ToList();
-                foreach (string file in Mylocalfolder)
-                {
-                    count++;
-                }
-                if (count >= 1)
+                List<String> Mylocalfolder = Directory.GetFiles(path, "*.txt", SearchOption.AllDirectories).ToList();
+                if (Mylocalfolder.Count >= 1)
                 {
                     return true;
                 }
@@ -394,6 +403,17 @@ namespace Log_Manager
             {
                 return false;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+            this.Hide();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Log_Manager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ftp://10.201.192.227/DataLOG/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("ftp://10.208.180.20/DataLOG/")]
         public string FTP {
             get {
                 return ((string)(this["FTP"]));
@@ -73,7 +73,7 @@ namespace Log_Manager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("apple")]
+        [global::System.Configuration.DefaultSettingValueAttribute("testlog")]
         public string user {
             get {
                 return ((string)(this["user"]));
@@ -85,7 +85,7 @@ namespace Log_Manager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("pa31597")]
+        [global::System.Configuration.DefaultSettingValueAttribute("testlog1234")]
         public string password {
             get {
                 return ((string)(this["password"]));
@@ -97,7 +97,7 @@ namespace Log_Manager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ftp://10.201.192.227/LogMaster/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("ftp://10.208.180.20/LogMaster/")]
         public string LogMaster {
             get {
                 return ((string)(this["LogMaster"]));

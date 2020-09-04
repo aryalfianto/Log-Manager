@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Log_Manager.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Local" Type="System.String" Scope="User">
+    <Setting Name="Local1" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Datalog_Manager</Value>
     </Setting>
     <Setting Name="FTP" Type="System.String" Scope="User">
@@ -22,6 +22,15 @@
     </Setting>
     <Setting Name="LogMaster" Type="System.String" Scope="User">
       <Value Profile="(Default)">ftp://10.208.180.20/LogMaster/</Value>
+    </Setting>
+    <Setting Name="processname" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Log Manager</Value>
+    </Setting>
+    <Setting Name="dirapps" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Datalog_Application</Value>
+    </Setting>
+    <Setting Name="projectfolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Datalog_Project</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -26,12 +26,12 @@ namespace Log_Manager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("C:\\Datalog_Manager")]
-        public string Local {
+        public string Local1 {
             get {
-                return ((string)(this["Local"]));
+                return ((string)(this["Local1"]));
             }
             set {
-                this["Local"] = value;
+                this["Local1"] = value;
             }
         }
         
@@ -104,6 +104,42 @@ namespace Log_Manager.Properties {
             }
             set {
                 this["LogMaster"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Log Manager")]
+        public string processname {
+            get {
+                return ((string)(this["processname"]));
+            }
+            set {
+                this["processname"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Datalog_Application")]
+        public string dirapps {
+            get {
+                return ((string)(this["dirapps"]));
+            }
+            set {
+                this["dirapps"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Datalog_Project")]
+        public string projectfolder {
+            get {
+                return ((string)(this["projectfolder"]));
+            }
+            set {
+                this["projectfolder"] = value;
             }
         }
     }

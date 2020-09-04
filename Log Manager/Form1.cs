@@ -9,27 +9,37 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;
 using System.Diagnostics;
+using Guna.UI2.WinForms;
 
 namespace Log_Manager
 {
     public partial class Form1 : Form
     {
-        public string local = Properties.Settings.Default.Local;
+        public string local = Properties.Settings.Default.Local1;
         public string log1  = Properties.Settings.Default.Log1;
         public string log2  = Properties.Settings.Default.Log2;
         public string user = Properties.Settings.Default.user;
         public string password = Properties.Settings.Default.password;
         public string LogMaster = Properties.Settings.Default.LogMaster;
         public string DataLogFTP = Properties.Settings.Default.FTP;
+        public string projectfolder = Properties.Settings.Default.projectfolder;
         public string logname;
         public string Tahun,Tanggal,Bulan;
+        
         public Form1()
         {
             InitializeComponent();
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                Hide();
+                notifyIcon1.Visible = true;
+            }
             LogManager();
+            guna2TextBox1.Text = DataLogFTP;
+            guna2TextBox2.Text = local;
         }
         string[] pemisah;
         string jamlocal;
@@ -65,23 +75,72 @@ namespace Log_Manager
             Bulan = date2[0];
             Tanggal = date2[1];
         }
+
+        private void LocalMove(string localpath)
+        {
+            List<String> Mylocalfolder = Directory.GetFiles(localpath, "*", SearchOption.AllDirectories).ToList();
+            foreach (string file in Mylocalfolder)
+            {
+                try
+                {
+                    FileInfo mFile = new FileInfo(file);
+                    Directory.CreateDirectory(projectfolder + "\\" + logname );
+                    File.Move(file, projectfolder + "\\" + logname+"\\"+ mFile.Name);
+                }
+                catch 
+                {
+                    
+                }
+
+            }
+        }
+        private void SendtoFTP(string localpath, string ftppath)
+        {
+            GetDateTime();
+            List<String> Mylocalfolder = Directory.GetFiles(localpath, "*", SearchOption.AllDirectories).ToList();
+            foreach (string file in Mylocalfolder)
+            {
+                try
+                {
+                    FileInfo mFile = new FileInfo(file);
+                    string folderproject = Path.GetFileName(Path.GetDirectoryName(file));// get latest folder name
+                    string hasilfile = Convert.ToString(mFile);
+                    CreateFolder(ftppath,folderproject, Tahun, Bulan, Tanggal);
+                    using (var client = new WebClient())
+                    {
+                        client.Credentials = new NetworkCredential(user, password);
+                        client.UploadFile(
+                            ftppath + folderproject + "/" + Tahun + "/" + Bulan + "/" + Tanggal + "/" + mFile.Name,
+                            WebRequestMethods.Ftp.UploadFile, file);
+                        System.IO.File.Delete(hasilfile);
+                        notifyIcon1.BalloonTipText = (mFile.Name + " Sent From " + folderproject +" !");
+                        notifyIcon1.ShowBalloonTip(1000);
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+        }
         private void LogManager()
         {
             bool Lokal = CekLocal(local);
             if (Lokal == true)
             {
-                bool logmaster;
+                //bool logmaster;
                 testplan();
-                logmaster = CekFTPtestlog(LogMaster, logname);
-                if (logmaster == true)
-                {
-                    CompareLog(local, LogMaster);
-                    SendtoFTP(local, DataLogFTP);
-                }
-                else
-                {
-                    SendtoFTP(local, DataLogFTP);
-                }
+                LocalMove(local);
+                //logmaster = CekFTPtestlog(LogMaster, logname);
+                //if (logmaster == true)
+                //{
+                //    CompareLog(local, LogMaster);
+                //    SendtoFTP(local, DataLogFTP);
+                //}
+                //else
+                //{
+                SendtoFTP(projectfolder, DataLogFTP);
+                //}
             }  
         }
         string [] ParsingLog(string arraye)
@@ -303,28 +362,10 @@ namespace Log_Manager
             List<string> asList = difference.ToList();
             return asList;
         }
-        private void SendtoFTP(string localpath, string ftppath)
+        
+        private void CreateFolder(string ftpServer, string Folderproject, string Tahun, string Bulan, string Tanggal)
         {
-            GetDateTime();
-            CreateFolder(DataLogFTP, Tahun, Bulan, Tanggal);
-            List<String> Mylocalfolder = Directory.GetFiles(localpath, "*.txt*", SearchOption.AllDirectories).ToList();
-            foreach (string file in Mylocalfolder)
-            {
-                FileInfo mFile = new FileInfo(file);
-                string hasilfile = Convert.ToString(mFile);
-                using (var client = new WebClient())
-                {
-                    client.Credentials = new NetworkCredential(user, password);
-                    client.UploadFile(ftppath + logname + "/" + Tahun + "/" + Bulan + "/" + Tanggal + "/" + mFile.Name, WebRequestMethods.Ftp.UploadFile, file);
-                    System.IO.File.Delete(hasilfile);
-                    notifyIcon1.BalloonTipText = (mFile.Name + " Sent!");
-                    notifyIcon1.ShowBalloonTip(1000);
-                }
-            }
-        }
-        private void CreateFolder(string ftpServer, string Tahun, string Bulan, string Tanggal)
-        {
-            FtpWebRequest request = (FtpWebRequest)FtpWebRequest.Create(ftpServer + logname + @"/" + Tahun + @"/" + Bulan + @"/" + Tanggal + @"/");
+            FtpWebRequest request = (FtpWebRequest)FtpWebRequest.Create(ftpServer + Folderproject + @"/" + Tahun + @"/" + Bulan + @"/" + Tanggal + @"/");
             request.Credentials = new NetworkCredential(user, password);
             request.Method = WebRequestMethods.Ftp.MakeDirectory;
             try
@@ -344,6 +385,7 @@ namespace Log_Manager
             string projectnow = project.Substring(project.LastIndexOf("\\"));
             string []projectnow1 = projectnow.Split('#');
             string final = projectnow1[0].Replace(@"\", "");
+            gunaLabel5.Text = final;
             logname = final;
         }
         private void testplan()
@@ -389,7 +431,7 @@ namespace Log_Manager
             }
             try
             {
-                List<String> Mylocalfolder = Directory.GetFiles(path, "*.txt", SearchOption.AllDirectories).ToList();
+                List<String> Mylocalfolder = Directory.GetFiles(path, "*", SearchOption.AllDirectories).ToList();
                 if (Mylocalfolder.Count >= 1)
                 {
                     return true;
@@ -413,7 +455,16 @@ namespace Log_Manager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Hide();
+            this.WindowState = FormWindowState.Minimized;
+            Hide();
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show();
+            this.WindowState = FormWindowState.Normal;
+            notifyIcon1.Visible = false;
+            
         }
     }
 }

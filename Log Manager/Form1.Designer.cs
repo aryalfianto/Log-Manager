@@ -37,9 +37,7 @@
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2PictureBox2 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.gunaGradient2Panel1 = new Guna.UI.WinForms.GunaGradient2Panel();
-            this.gunaLabel2 = new Guna.UI.WinForms.GunaLabel();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.gunaLabel1 = new Guna.UI.WinForms.GunaLabel();
             this.guna2ControlBox2 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.gunaLabel5 = new Guna.UI.WinForms.GunaLabel();
@@ -105,10 +103,8 @@
             // gunaGradient2Panel1
             // 
             this.gunaGradient2Panel1.BackColor = System.Drawing.Color.Transparent;
-            this.gunaGradient2Panel1.Controls.Add(this.gunaLabel2);
             this.gunaGradient2Panel1.Controls.Add(this.guna2PictureBox2);
             this.gunaGradient2Panel1.Controls.Add(this.guna2PictureBox1);
-            this.gunaGradient2Panel1.Controls.Add(this.gunaLabel1);
             this.gunaGradient2Panel1.Controls.Add(this.guna2ControlBox2);
             this.gunaGradient2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.gunaGradient2Panel1.GradientColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(84)))), ((int)(((byte)(134)))));
@@ -118,38 +114,16 @@
             this.gunaGradient2Panel1.Size = new System.Drawing.Size(225, 51);
             this.gunaGradient2Panel1.TabIndex = 4;
             // 
-            // gunaLabel2
-            // 
-            this.gunaLabel2.AutoSize = true;
-            this.gunaLabel2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gunaLabel2.ForeColor = System.Drawing.Color.White;
-            this.gunaLabel2.Location = new System.Drawing.Point(121, 27);
-            this.gunaLabel2.Name = "gunaLabel2";
-            this.gunaLabel2.Size = new System.Drawing.Size(53, 16);
-            this.gunaLabel2.TabIndex = 4;
-            this.gunaLabel2.Text = "Sender";
-            // 
             // guna2PictureBox1
             // 
             this.guna2PictureBox1.Image = global::Log_Manager.Properties.Resources.icons8_paper_plane_64px;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(72, 6);
+            this.guna2PictureBox1.Location = new System.Drawing.Point(74, 6);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
             this.guna2PictureBox1.ShadowDecoration.Parent = this.guna2PictureBox1;
             this.guna2PictureBox1.Size = new System.Drawing.Size(43, 37);
             this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.guna2PictureBox1.TabIndex = 1;
             this.guna2PictureBox1.TabStop = false;
-            // 
-            // gunaLabel1
-            // 
-            this.gunaLabel1.AutoSize = true;
-            this.gunaLabel1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gunaLabel1.ForeColor = System.Drawing.Color.White;
-            this.gunaLabel1.Location = new System.Drawing.Point(121, 6);
-            this.gunaLabel1.Name = "gunaLabel1";
-            this.gunaLabel1.Size = new System.Drawing.Size(31, 16);
-            this.gunaLabel1.TabIndex = 2;
-            this.gunaLabel1.Text = "Log";
             // 
             // guna2ControlBox2
             // 
@@ -218,6 +192,7 @@
             this.guna2TextBox2.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2TextBox2.HoverState.Parent = this.guna2TextBox2;
             this.guna2TextBox2.Location = new System.Drawing.Point(9, 176);
+            this.guna2TextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2TextBox2.Name = "guna2TextBox2";
             this.guna2TextBox2.PasswordChar = '\0';
             this.guna2TextBox2.PlaceholderText = "";
@@ -254,6 +229,7 @@
             this.guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2TextBox1.HoverState.Parent = this.guna2TextBox1;
             this.guna2TextBox1.Location = new System.Drawing.Point(9, 121);
+            this.guna2TextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2TextBox1.Name = "guna2TextBox1";
             this.guna2TextBox1.PasswordChar = '\0';
             this.guna2TextBox1.PlaceholderText = "";
@@ -290,7 +266,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).EndInit();
             this.gunaGradient2Panel1.ResumeLayout(false);
-            this.gunaGradient2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.guna2GradientPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -306,10 +281,8 @@
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
         private Guna.UI.WinForms.GunaGradient2Panel gunaGradient2Panel1;
-        private Guna.UI.WinForms.GunaLabel gunaLabel2;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox2;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
-        private Guna.UI.WinForms.GunaLabel gunaLabel1;
         private Guna.UI2.WinForms.Guna2ControlBox guna2ControlBox2;
         private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
         private Guna.UI.WinForms.GunaLabel gunaLabel5;

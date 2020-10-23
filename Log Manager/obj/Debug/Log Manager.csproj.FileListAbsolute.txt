@@ -18,3 +18,4 @@ D:\Desktop Programming\Log-Manager\Log Manager\obj\Debug\Log Manager.exe
 D:\Desktop Programming\Log-Manager\Log Manager\obj\Debug\Log Manager.pdb
 D:\Desktop Programming\Log Manager\Log Manager\bin\Debug\Guna.UI.dll
 D:\Desktop Programming\Log Manager\Log Manager\bin\Debug\Guna.UI2.dll
+D:\Desktop Programming\Log Manager\Log Manager\obj\Debug\Log Manager.csprojResolveAssemblyReference.cache
